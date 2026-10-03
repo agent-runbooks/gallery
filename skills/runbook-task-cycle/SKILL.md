@@ -7,7 +7,7 @@ description: One coding task end to end in a repository. A coder, the project's 
 
 Leaves one task implemented in a repository, uncommitted, with the checks green and every review finding triage marked to fix either fixed with evidence or listed for the human. Commit, PR and CI happen outside.
 
-Every step runs as a thronglet, so the session needs the [throng](https://github.com/Nodge/throng-mcp) MCP server: `run_thronglet`, `wait_thronglet`, `send_message`. Throng does not wake a session up: launch a step with `background: true` and, in the same turn, collect it with `wait_thronglet`, one call per step, `timeout_s` at the largest value the tool accepts, called again when it returns before the step has ended. You launch every thronglet yourself, so no executor relays another agent's reply.
+Every step runs as a thronglet, so the session needs the [throng](https://github.com/agent-runbooks/throng-mcp) MCP server: `run_thronglet`, `wait_thronglet`, `send_message`. Throng does not wake a session up: launch a step with `background: true` and, in the same turn, collect it with `wait_thronglet`, one call per step, `timeout_s` at the largest value the tool accepts, called again when it returns before the step has ended. You launch every thronglet yourself, so no executor relays another agent's reply.
 
 ## Inputs
 

@@ -2,7 +2,7 @@
 
 A [runbook](https://github.com/agent-runbooks/skills) for one coding task in a repository, from brief to reviewed, uncommitted changes. A coder implements the brief, a cheap model runs the checks, two different models review independently, an arbiter triages their findings against the code, the coder fixes what is worth fixing, a verifier checks the fixes, and a last pass cleans up comments and wording. The human is asked only when nothing names the checks, when the repository is dirty at the start, or when the fix rounds run out. Commit, PR and CI stay outside.
 
-Every step is a thronglet: [throng](https://github.com/Nodge/throng-mcp) is an MCP server that runs Claude Code, Codex or OpenCode as a subagent of any of them and returns the agent's final message, which is the shape a runbook step already has. The session that runs this runbook needs it.
+Every step is a thronglet: [throng](https://github.com/agent-runbooks/throng-mcp) is an MCP server that runs Claude Code, Codex or OpenCode as a subagent of any of them and returns the agent's final message, which is the shape a runbook step already has. The session that runs this runbook needs it.
 
 ```
 SKILL.md        what the orchestrator reads: inputs, execution rules, end of run
@@ -26,7 +26,7 @@ Each is an input of the run, so a project changes them in its profile and the hu
 
 ## Try it
 
-Install the skill, see [the repository README](../../README.md). Then start a session in a repository with green checks and ask, with your own task and checks command: "Run runbook-task-cycle: add an optional `max_length` to `slugify`, cut on a word boundary; checks `python3 -m unittest`."
+Install the skill, see [the repository README](../../README.md). Then start a session in a repository and ask, with your own task and checks command: "Run runbook-task-cycle: add an optional `max_length` to `slugify`, cut on a word boundary; checks `python3 -m unittest`."
 
 ## The profile
 

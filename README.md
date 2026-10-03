@@ -44,7 +44,7 @@ Copy `skills/<name>` into your harness's skills directory: `~/.claude/skills`, `
 
 ### ◆ runbook-task-cycle
 
-One coding task end to end: a coder implements the brief, a cheap model runs the checks, two models from different vendors review independently, an arbiter triages their findings, the coder fixes, a verifier checks the fixes, a last pass cleans up comments and wording. A project adapts it with one profile file: its checks, its version control, its rules, its models. Needs [throng](https://github.com/Nodge/throng-mcp): every step runs as a thronglet. [Read more](skills/runbook-task-cycle).
+One coding task end to end: a coder implements the brief, a cheap model runs the checks, two models from different vendors review independently, an arbiter triages their findings, the coder fixes, a verifier checks the fixes, a last pass cleans up comments and wording. A project adapts it with one profile file: its checks, its version control, its rules, its models. Needs [throng](https://github.com/agent-runbooks/throng-mcp): every step runs as a thronglet. [Read more](skills/runbook-task-cycle).
 
 ## Contributing
 
