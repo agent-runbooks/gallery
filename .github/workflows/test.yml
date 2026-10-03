@@ -1,0 +1,23 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  runbooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Every runbook is consistent and carries a released engine
+        run: |
+          for dir in skills/*/; do
+            echo "== $dir"
+            (cd "$dir" && python flow.py --check)
+            version=$(sed -n "s/^__version__ = '\(.*\)'$/\1/p" "$dir/runbook.py")
+            curl -fsSL "https://raw.githubusercontent.com/agent-runbooks/skills/refs/tags/agent-runbook-authoring/v$version/skills/agent-runbook-authoring/references/runbook.py" | cmp - "$dir/runbook.py"
+          done
