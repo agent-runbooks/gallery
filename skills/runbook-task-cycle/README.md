@@ -26,7 +26,9 @@ Each is an input of the run, so a project changes them in its profile and the hu
 
 ## Try it
 
-Install the skill, see [the repository README](../../README.md). Then start a session in a repository and ask, with your own task and checks command: "Run runbook-task-cycle: add an optional `max_length` to `slugify`, cut on a word boundary; checks `python3 -m unittest`."
+Install the skill, see [the repository README](../../README.md). Then start a session in a repository and ask your agent, with your own task and checks:
+
+> Run runbook-task-cycle: add an optional `max_length` to `slugify`, cut on a word boundary. The checks are `python3 -m unittest`.
 
 ## The profile
 

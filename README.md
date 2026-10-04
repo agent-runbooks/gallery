@@ -1,15 +1,23 @@
 # Agent Runbooks gallery
 
-Runbooks to install and adapt. A runbook is a procedure an agent session runs step by step through subagents. The skill that writes runbooks and the viewer that shows a run live in [agent-runbooks/skills](https://github.com/agent-runbooks/skills).
+Ready-made runbooks for AI agents. Install a procedure, run it in your session, and adapt it to your work.
 
-A runbook is a skill in the [Agent Skills](https://agentskills.io) format, so it installs like any other skill and carries its own copy of the engine. Running one does not need the authoring skill.
+A runbook is an [Agent Skill](https://agentskills.io) that an agent session runs step by step through subagents. How it works, and how to write your own: [agent-runbooks/skills](https://github.com/agent-runbooks/skills).
+
+## Runbooks
+
+| Runbook | What you get | Requires |
+|---|---|---|
+| [runbook-task-cycle](skills/runbook-task-cycle) | one coding task implemented and reviewed, with changes left uncommitted | [throng-mcp](https://github.com/agent-runbooks/throng-mcp) |
 
 ## Install
 
-Pick one way, otherwise each runbook shows up twice.
+You need Python 3.10 or newer, a harness whose session can launch subagents and learn when they finish, and what the runbook lists under Requires. Pick one way to install, otherwise each runbook shows up twice.
 
 <details>
 <summary><strong>Claude Code plugin</strong></summary>
+
+One plugin per runbook:
 
 ```bash
 claude plugin marketplace add agent-runbooks/gallery
@@ -40,11 +48,12 @@ Copy `skills/<name>` into your harness's skills directory: `~/.claude/skills`, `
 
 </details>
 
-## Runbooks
+To see a run's status in the chat after every step, install [runbook-viewer](https://github.com/agent-runbooks/skills/tree/main/skills/runbook-viewer) as well.
 
-### ◆ runbook-task-cycle
+## Adapt a runbook
 
-One coding task end to end: a coder implements the brief, a cheap model runs the checks, two models from different vendors review independently, an arbiter triages their findings, the coder fixes, a verifier checks the fixes, a last pass cleans up comments and wording. A project adapts it with one profile file: its checks, its version control, its rules, its models. Needs [throng](https://github.com/agent-runbooks/throng-mcp): every step runs as a thronglet. [Read more](skills/runbook-task-cycle).
+1. **Settings first.** Each runbook's README says what you can change without touching its steps. runbook-task-cycle, for one, takes a [profile file](skills/runbook-task-cycle#the-profile) per repository: its checks, version control, rules and models.
+2. **Then a copy.** When you need other steps, copy the runbook into your skills directory under another name and edit `flow.py` and the prompts. [agent-runbook-authoring](https://github.com/agent-runbooks/skills/tree/main/skills/agent-runbook-authoring) helps with that, and with a new runbook from scratch.
 
 ## Contributing
 
@@ -61,4 +70,4 @@ CI checks the second and the third.
 
 ## License
 
-MIT
+[MIT](LICENSE)
