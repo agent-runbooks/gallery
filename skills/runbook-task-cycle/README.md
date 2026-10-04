@@ -2,7 +2,7 @@
 
 A [runbook](https://github.com/agent-runbooks/skills) for one coding task in a repository, from brief to reviewed, uncommitted changes. A coder implements the brief, a cheap model runs the checks, two different models review independently, an arbiter triages their findings against the code, the coder fixes what is worth fixing, a verifier checks the fixes, and a last pass cleans up comments and wording. The human is asked only when nothing names the checks, when the repository is dirty at the start, or when the fix rounds run out. Commit, PR and CI stay outside.
 
-Every step is a thronglet: [throng](https://github.com/agent-runbooks/throng-mcp) is an MCP server that runs Claude Code, Codex or OpenCode as a subagent of any of them and returns the agent's final message, which is the shape a runbook step already has. The session that runs this runbook needs it.
+Every step runs through [throng-mcp](https://github.com/agent-runbooks/throng-mcp), an MCP server that runs Claude Code, Codex or OpenCode as a subagent of any of them and returns the agent's final message, which is the shape a runbook step already has. The session that runs this runbook needs it.
 
 ```
 SKILL.md        what the orchestrator reads: inputs, execution rules, end of run
@@ -13,7 +13,7 @@ prompts/        common.md and one prompt per step
 
 ## Models
 
-Four executors, each an agent string as throng names it, `<harness>/<model>[:<effort>]`:
+Four executors, each an agent string as throng-mcp names it, `<harness>/<model>[:<effort>]`:
 
 | Executor | Steps | Default |
 |---|---|---|

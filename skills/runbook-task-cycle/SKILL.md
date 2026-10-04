@@ -7,7 +7,7 @@ description: One coding task end to end in a repository. A coder, the project's 
 
 Leaves one task implemented in a repository, uncommitted, with the checks green and every review finding triage marked to fix either fixed with evidence or listed for the human. Commit, PR and CI happen outside.
 
-Every step runs as a thronglet, so the session needs the [throng](https://github.com/agent-runbooks/throng-mcp) MCP server: `run_thronglet`, `wait_thronglet`, `send_message`. Throng does not wake a session up: launch a step with `background: true` and, in the same turn, collect it with `wait_thronglet`, one call per step, `timeout_s` at the largest value the tool accepts, called again when it returns before the step has ended. You launch every thronglet yourself, so no executor relays another agent's reply.
+Every step runs as a thronglet, so the session needs the [throng-mcp](https://github.com/agent-runbooks/throng-mcp) MCP server: `run_thronglet`, `wait_thronglet`, `send_message`. throng-mcp does not wake a session up: launch a step with `background: true` and, in the same turn, collect it with `wait_thronglet`, one call per step, `timeout_s` at the largest value the tool accepts, called again when it returns before the step has ended. You launch every thronglet yourself, so no executor relays another agent's reply.
 
 ## Inputs
 
@@ -18,7 +18,7 @@ Every step runs as a thronglet, so the session needs the [throng](https://github
 - `task`: a ticket key or short id, used as given in the run directory's name. Optional
 - `scope`: a directory the changes stay in, relative to `repo`, such as `packages/grid` in a monorepo. Optional, empty means the whole repository
 - `maxFixRounds`: positive integer, default 2. One round is one pass of fix and verify
-- `top`, `strong`, `light`, `second`: the agent of each executor as throng names it, `<harness>/<model>[:<effort>]`. The defaults are in the Models table of `README.md`, the profile's Executors section replaces them for the project, the human's words replace both for one run
+- `top`, `strong`, `light`, `second`: the agent of each executor as throng-mcp names it, `<harness>/<model>[:<effort>]`. The defaults are in the Models table of `README.md`, the profile's Executors section replaces them for the project, the human's words replace both for one run
 - `run-id`: given only to resume an interrupted run
 - Smoke input, in a repository with a profile and green checks: brief "Add a file `SMOKE.md` with the single line `smoke`", no other input. The expected path is the shortest one: the checks pass and the reviewers find nothing. The human deletes `SMOKE.md` after. Without a profile: the same brief in any small repository with green checks, the checks command given with the brief. A second smoke input reaches a human step: the same repository with an untracked file `notes.txt` left in it, and the answer `stop` at ask-dirty
 
