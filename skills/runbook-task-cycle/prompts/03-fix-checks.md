@@ -5,29 +5,3 @@ The checks fail. Their output is in `checks.md`, and the coder's report on the i
 Write `fix-checks.md`: what you changed and why, or why nothing within what the brief asks for fixes the failures, and the Checks section.
 
 `fixed` is true when you changed something that addresses the failures. If no such fix exists, change nothing and reply `fixed: false`.
-
-## Reply schema
-
-```json
-{
-  "type": "object",
-  "oneOf": [
-    {
-      "properties": {
-        "status": { "const": "done" },
-        "fixed": { "type": "boolean" }
-      },
-      "required": ["status", "fixed"],
-      "additionalProperties": false
-    },
-    {
-      "properties": {
-        "status": { "enum": ["failed", "blocked"] },
-        "reason": { "type": "string", "minLength": 1 }
-      },
-      "required": ["status", "reason"],
-      "additionalProperties": false
-    }
-  ]
-}
-```

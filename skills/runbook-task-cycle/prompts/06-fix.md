@@ -8,27 +8,4 @@ Address the cause each finding describes. Do not merely silence its check. If a 
 
 Write `fix.md`: per finding id, what changed (`file:line`) or why it was left, and the Checks section.
 
-## Reply schema
-
-```json
-{
-  "type": "object",
-  "oneOf": [
-    {
-      "properties": {
-        "status": { "const": "done" }
-      },
-      "required": ["status"],
-      "additionalProperties": false
-    },
-    {
-      "properties": {
-        "status": { "enum": ["failed", "blocked"] },
-        "reason": { "type": "string", "minLength": 1 }
-      },
-      "required": ["status", "reason"],
-      "additionalProperties": false
-    }
-  ]
-}
-```
+`done` means `fix.md` accounts for every finding: fixed, or left with the reason.

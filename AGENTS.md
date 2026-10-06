@@ -12,7 +12,7 @@ A new runbook lands in three places in one change:
 
 ## Dependencies
 
-Runbook code uses the standard library of Python 3.10 only. What a run needs from outside, MCP servers, harnesses, models, is listed in the Requires column of the README table and in the runbook's own README.
+Runbook code uses the standard library of Python 3.9 only. What a run needs from outside, MCP servers, harnesses, models, is listed in the Requires column of the README table and in the runbook's own README.
 
 ## Engine
 

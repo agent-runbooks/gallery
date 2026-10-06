@@ -16,29 +16,3 @@ Every finding names its `failure_scenario` in one sentence: the concrete consequ
 Write the review file. One heading `### <id-prefix><n>: <title>` per finding, numbered from 1, then lines `file: <path>:<line>`, `failure_scenario: <one sentence>`, and a description: what is wrong, how to check, how to fix. With no findings the file starts with the line `No findings.`
 
 `findings` is the number of finding headings in that file.
-
-## Reply schema
-
-```json
-{
-  "type": "object",
-  "oneOf": [
-    {
-      "properties": {
-        "status": { "const": "done" },
-        "findings": { "type": "integer", "minimum": 0 }
-      },
-      "required": ["status", "findings"],
-      "additionalProperties": false
-    },
-    {
-      "properties": {
-        "status": { "enum": ["failed", "blocked"] },
-        "reason": { "type": "string", "minLength": 1 }
-      },
-      "required": ["status", "reason"],
-      "additionalProperties": false
-    }
-  ]
-}
-```

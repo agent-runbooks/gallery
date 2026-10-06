@@ -17,29 +17,3 @@ Merge duplicates: keep one id, reject the other with reason "duplicate of <id>".
 Write `triage.md` with two sections. `## To fix`: one heading `### <id>: <title>` per finding, then `file`, `failure_scenario`, the verdict with its evidence, and the description. `## Rejected`: one line per id with the reason: "refuted: <evidence>", "duplicate of <id>", or "not worth it: <cost against benefit>". Every id from both review files appears exactly once. A section with nothing in it holds the single line `None.`
 
 `to_fix` is the number of `###` headings under `## To fix`.
-
-## Reply schema
-
-```json
-{
-  "type": "object",
-  "oneOf": [
-    {
-      "properties": {
-        "status": { "const": "done" },
-        "to_fix": { "type": "integer", "minimum": 0 }
-      },
-      "required": ["status", "to_fix"],
-      "additionalProperties": false
-    },
-    {
-      "properties": {
-        "status": { "enum": ["failed", "blocked"] },
-        "reason": { "type": "string", "minLength": 1 }
-      },
-      "required": ["status", "reason"],
-      "additionalProperties": false
-    }
-  ]
-}
-```

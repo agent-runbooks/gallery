@@ -11,29 +11,3 @@ Then run the checks.
 Write `polish.md`: what you removed or reworded, file by file, one line each, or `Nothing to change.`, and the Checks section.
 
 `passed` is true only when every check ran and exited 0.
-
-## Reply schema
-
-```json
-{
-  "type": "object",
-  "oneOf": [
-    {
-      "properties": {
-        "status": { "const": "done" },
-        "passed": { "type": "boolean" }
-      },
-      "required": ["status", "passed"],
-      "additionalProperties": false
-    },
-    {
-      "properties": {
-        "status": { "enum": ["failed", "blocked"] },
-        "reason": { "type": "string", "minLength": 1 }
-      },
-      "required": ["status", "reason"],
-      "additionalProperties": false
-    }
-  ]
-}
-```

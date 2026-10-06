@@ -12,7 +12,7 @@ A runbook is an [Agent Skill](https://agentskills.io) that an agent session runs
 
 ## Install
 
-You need Python 3.10 or newer, a harness whose session can launch subagents and learn when they finish, and what the runbook lists under Requires. Pick one way to install, otherwise each runbook shows up twice.
+You need Python 3.9 or newer, a harness whose session can launch subagents and learn when they finish, and what the runbook lists under Requires. Pick one way to install, otherwise each runbook shows up twice.
 
 <details>
 <summary><strong>Claude Code plugin</strong></summary>
