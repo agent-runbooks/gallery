@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Steps and transitions of runbook-task-cycle. Run with --help for the commands."""
+"""Steps and transitions of runbook-implement-task. Run with --help for the commands."""
 from runbook import Runbook, end, parallel
 
 rb = Runbook()

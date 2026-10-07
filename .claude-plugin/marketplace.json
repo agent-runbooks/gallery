@@ -8,12 +8,12 @@
   },
   "plugins": [
     {
-      "name": "runbook-task-cycle",
+      "name": "runbook-implement-task",
       "description": "One coding task end to end: a coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass. Every step runs through throng-mcp; a project adapts it with one profile file.",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/runbook-task-cycle"
+        "./skills/runbook-implement-task"
       ]
     }
   ]

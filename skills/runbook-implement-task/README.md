@@ -1,4 +1,4 @@
-# runbook-task-cycle
+# runbook-implement-task
 
 A [runbook](https://github.com/agent-runbooks/skills) for one coding task in a repository, from brief to reviewed, uncommitted changes. A coder implements the brief, a cheap model runs the checks, two different models review independently, an arbiter triages their findings against the code, the coder fixes what is worth fixing, a verifier checks the fixes, and a last pass cleans up comments and wording. The human is asked only when nothing names the checks, when the repository is dirty at the start, or when the fix rounds run out. Commit, PR and CI stay outside.
 
@@ -22,20 +22,20 @@ Four executors, each an agent string as throng-mcp names it, `<harness>/<model>[
 | `light` | preflight, checks | `claude/sonnet:low` |
 | `second` | review B | `codex/gpt-6.1-sol:high` |
 
-Each is an input of the run, so a project changes them in its profile and the human changes them for one run in words: "run the task cycle with astra as the second reviewer".
+Each is an input of the run, so a project changes them in its profile and the human changes them for one run in words: "run implement-task with astra as the second reviewer".
 
 ## Try it
 
 Install the skill, see [the repository README](../../README.md). Then start a session in a repository and ask your agent, with your own task and checks:
 
-> Run runbook-task-cycle: add an optional `max_length` to `slugify`, cut on a word boundary. The checks are `python3 -m unittest`.
+> Run runbook-implement-task: add an optional `max_length` to `slugify`, cut on a word boundary. The checks are `python3 -m unittest`.
 
 ## The profile
 
-A project adapts the runbook with one file, `<repo>/.agent-runbooks/task-cycle.md`, committed. The orchestrator copies it into the run directory, every executor reads it, and each of its sections replaces a default of the runbook. All sections are optional; without the file the defaults hold: git, the `checks` input, the repository's instructions file. Keep `.agent-runbooks/runs/` out of version control, not the whole directory.
+A project adapts the runbook with one file, `<repo>/.agent-runbooks/implement-task.md`, committed. The orchestrator copies it into the run directory, every executor reads it, and each of its sections replaces a default of the runbook. All sections are optional; without the file the defaults hold: git, the `checks` input, the repository's instructions file. Keep `.agent-runbooks/runs/` out of version control, not the whole directory.
 
 ```markdown
-# Task cycle
+# Implement task
 
 ## Checks
 
@@ -61,7 +61,7 @@ What each section is for:
 
 - **Checks**: what to run, from where, and what counts as a check that was not called for. Replaces the `checks` input, which the human then omits. Needed when the checks are more than one command, or depend on which files changed: a monorepo that runs the checks of each package the changes touch.
 - **VCS**: how to list and show the uncommitted changes, for a repository under something other than git.
-- **Rules**: the project rules that matter in a task cycle, for the coder and the reviewers' third axis. A digest, since the executors read the instructions file anyway: the rules that are broken often, or that the file states too far down to be noticed.
+- **Rules**: the project rules that matter in a task, for the coder and the reviewers' third axis. A digest, since the executors read the instructions file anyway: the rules that are broken often, or that the file states too far down to be noticed.
 - **Executors**: the agent of the executors to change, one per line.
 
 The profile is prose read by models, so anything the steps need to know about the project goes there in the words you would use for a new colleague. When the profile is not enough, because the project needs another step or another graph, copy the skill into the project's skills directory under another name and edit `flow.py` and the prompts. From then on it is yours: the engine upgrade procedure is in [agent-runbook-authoring](https://github.com/agent-runbooks/skills/blob/main/skills/agent-runbook-authoring/SKILL.md).

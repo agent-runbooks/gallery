@@ -8,7 +8,7 @@ A runbook is an [Agent Skill](https://agentskills.io) that an agent session runs
 
 | Runbook | What you get | Requires |
 |---|---|---|
-| [runbook-task-cycle](skills/runbook-task-cycle) | one coding task implemented and reviewed, with changes left uncommitted | [throng-mcp](https://github.com/agent-runbooks/throng-mcp) |
+| [runbook-implement-task](skills/runbook-implement-task) | one coding task implemented and reviewed, with changes left uncommitted | [throng-mcp](https://github.com/agent-runbooks/throng-mcp) |
 
 ## Install
 
@@ -21,7 +21,7 @@ One plugin per runbook:
 
 ```bash
 claude plugin marketplace add agent-runbooks/gallery
-claude plugin install runbook-task-cycle@agent-runbooks-gallery
+claude plugin install runbook-implement-task@agent-runbooks-gallery
 ```
 
 </details>
@@ -36,7 +36,7 @@ npx skills add agent-runbooks/gallery
 It asks which runbooks to take and which agents to install them on. One runbook into the user directory of one agent:
 
 ```bash
-npx skills add agent-runbooks/gallery --skill runbook-task-cycle -g -a claude-code -y
+npx skills add agent-runbooks/gallery --skill runbook-implement-task -g -a claude-code -y
 ```
 
 </details>
@@ -52,7 +52,7 @@ To see a run's status in the chat after every step, install [runbook-viewer](htt
 
 ## Adapt a runbook
 
-1. **Settings first.** Each runbook's README says what you can change without touching its steps. runbook-task-cycle, for one, takes a [profile file](skills/runbook-task-cycle#the-profile) per repository: its checks, version control, rules and models.
+1. **Settings first.** Each runbook's README says what you can change without touching its steps. runbook-implement-task, for one, takes a [profile file](skills/runbook-implement-task#the-profile) per repository: its checks, version control, rules and models.
 2. **Then a copy.** When you need other steps, copy the runbook into your skills directory under another name and edit `flow.py` and the prompts. [agent-runbook-authoring](https://github.com/agent-runbooks/skills/tree/main/skills/agent-runbook-authoring) helps with that, and with a new runbook from scratch.
 
 ## Contributing

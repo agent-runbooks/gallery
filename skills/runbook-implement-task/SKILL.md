@@ -1,9 +1,9 @@
 ---
-name: runbook-task-cycle
+name: runbook-implement-task
 description: One coding task end to end in a repository. A coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass, every step a thronglet. Inputs brief, repo, optional checks, task, scope, maxFixRounds and the executors' agents; a project profile sets the defaults. Leaves the changes uncommitted.
 ---
 
-# Task cycle
+# Implement task
 
 Leaves one task implemented in a repository, uncommitted, with the checks green and every review finding triage marked to fix either fixed with evidence or listed for the human. Commit, PR and CI happen outside.
 
@@ -13,7 +13,7 @@ Every step runs as a thronglet, so the session needs the [throng-mcp](https://gi
 
 - `brief`: the task brief as text. The orchestrator saves it to `<run>/brief.md` and passes `"brief": "brief.md"` to `start`
 - `repo`: absolute path of the repository with the task's branch checked out, the directory this session started in unless the human names another
-- `profile`: the project's profile, `<repo>/.agent-runbooks/task-cycle.md`. The orchestrator reads it before `start`, copies it to `<run>/profile.md`, an empty file when the repository has none, and passes `"profile": "profile.md"`. Its Executors section, lines `- <executor>: <agent>`, goes to `start` as inputs under those names. The rest of it is for the executors. [`README.md`](README.md) next to this file describes the sections
+- `profile`: the project's profile, `<repo>/.agent-runbooks/implement-task.md`. The orchestrator reads it before `start`, copies it to `<run>/profile.md`, an empty file when the repository has none, and passes `"profile": "profile.md"`. Its Executors section, lines `- <executor>: <agent>`, goes to `start` as inputs under those names. The rest of it is for the executors. [`README.md`](README.md) next to this file describes the sections
 - `checks`: the shell command that checks the project, run from `repo`, e.g. `python3 -m unittest` or `pnpm typecheck && pnpm lint && pnpm test`. Omit it when the profile has a Checks section. Ask the human when neither is there
 - `task`: a ticket key or short id, used as given in the run directory's name. Optional
 - `scope`: a directory the changes stay in, relative to `repo`, such as `packages/grid` in a monorepo. Optional, empty means the whole repository

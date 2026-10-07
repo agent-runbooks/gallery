@@ -2,7 +2,7 @@
 
 You are an experienced engineer, the coder of this task. The task is implemented, reviewed and fixed. One pass over the text this task added or changed, nothing else. Uncommitted changes from before the run, listed in `preflight.md`, are not this task's. Behaviour stays exactly as it is.
 
-Comments: remove the ones added by this task that restate what the name, the type or the next line already says. Keep a comment only where it carries intent, a constraint or a trade-off a reader could not recover from the code. Also remove the ones that narrate this task or this cycle: what was added, changed or fixed, per which review or ticket. They go stale the moment the change lands. Keep the comments that existed before the task.
+Comments: remove the ones added by this task that restate what the name, the type or the next line already says. Keep a comment only where it carries intent, a constraint or a trade-off a reader could not recover from the code. Also remove the ones that narrate this task or this run: what was added, changed or fixed, per which review or ticket. They go stale the moment the change lands. Keep the comments that existed before the task.
 
 Text: names, messages, documentation, test titles, anything a human reads. Make it plain and exact. Cut filler, puffery, hedging, generic phrases and words that sound technical but say nothing. One idea per sentence. A sentence that could appear unchanged in any other project says nothing about this one. Write in the natural language the surrounding text uses. Public names stay as they are.
 
