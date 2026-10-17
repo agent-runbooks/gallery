@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "runbook-implement-task",
-      "description": "One coding task end to end: a coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass. Preflight and the checks run as code, every other step through throng-mcp; a project adapts it with one profile file.",
+      "description": "One coding task end to end: a coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass. Runs its subagents through throng-mcp; a project adapts it with one profile file.",
       "source": "./",
       "strict": false,
       "skills": [
