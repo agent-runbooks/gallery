@@ -1,6 +1,6 @@
 ---
 name: runbook-implement-task
-description: One coding task end to end in a repository. A coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass, every agent step a thronglet. Inputs brief, repo, checks, optional statusCommand, task, scope, maxFixRounds and the executors' agents; a project profile sets the defaults. Leaves the changes uncommitted.
+description: One coding task end to end in a repository. A coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass, with subagents through throng-mcp. Takes a task brief; a project profile sets the rest. Leaves the changes uncommitted.
 ---
 
 # Implement task
