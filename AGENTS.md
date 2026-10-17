@@ -16,7 +16,7 @@ Runbook code uses the standard library of Python 3.9 only. What a run needs from
 
 ## Engine
 
-`runbook.py` in a runbook is a copy of the engine release its `__version__` names, and CI compares it with that tag. To move a runbook to a newer engine, follow the upgrade paragraph of `skills/agent-runbook-authoring/SKILL.md` in [agent-runbooks/skills](https://github.com/agent-runbooks/skills), and carry the release's sections from `references/template.md`: Execution rules into the runbook's `SKILL.md`, Executor constraints into `prompts/common.md`.
+`agent_runbooks.py` in a runbook is a copy of the engine release its `__version__` names, 2.0.0 or later, and CI compares it with that tag. The gallery takes no runbook that declares the engine from PyPI instead. To move a runbook to a newer engine, follow the upgrade paragraph of `skills/agent-runbook-authoring/SKILL.md` in [agent-runbooks/skills](https://github.com/agent-runbooks/skills), and carry the release's sections from `references/template.md`: Execution rules into the runbook's `SKILL.md`, Executor constraints into `prompts/common.md`.
 
 ## Checks
 

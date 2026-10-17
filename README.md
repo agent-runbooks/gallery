@@ -63,7 +63,7 @@ To see a run's status in the chat after every step, install [runbook-viewer](htt
 
 - a README with what the runbook requires (MCP servers, tools, models), the install command and an example request
 - `python flow.py --check` passing
-- `runbook.py` equal byte for byte to the engine release its `__version__` names, so a reviewer reads your steps and prompts and not the engine again
+- a copy of the engine, `agent_runbooks.py` from release 2.0.0 or later, equal byte for byte to the release its `__version__` names, so a reviewer reads your steps and prompts and not the engine again. A runbook that declares the engine from PyPI instead would need uv to run, so the gallery does not take it
 - one real run described in the pull request: the request, the path the run took, what it produced
 
 CI checks the second and the third.
