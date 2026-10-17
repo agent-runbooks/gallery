@@ -8,23 +8,12 @@ A runbook is an [Agent Skill](https://agentskills.io) that an agent session runs
 
 | Runbook | What you get | Requires |
 |---|---|---|
-| [runbook-implement-task](skills/runbook-implement-task) | one coding task implemented and reviewed, with changes left uncommitted | [throng-mcp](https://github.com/agent-runbooks/throng-mcp) |
+| [runbook-review-loop](skills/runbook-review-loop) | one code change: a coder and a reviewer in a loop until no findings are left; changes uncommitted | nothing beyond the skill |
+| [runbook-implement-task](skills/runbook-implement-task) | one coding task: the project's checks, two reviews by different models, triage of their findings, a polish pass; changes uncommitted | [throng-mcp](https://github.com/agent-runbooks/throng-mcp) |
 
 ## Install
 
 You need Python 3.9 or newer, a harness whose session can launch subagents and learn when they finish, and what the runbook lists under Requires. Pick one way to install, otherwise each runbook shows up twice.
-
-<details>
-<summary><strong>Claude Code plugin</strong></summary>
-
-One plugin per runbook:
-
-```bash
-claude plugin marketplace add agent-runbooks/gallery
-claude plugin install runbook-implement-task@agent-runbooks-gallery
-```
-
-</details>
 
 <details>
 <summary><strong>skills CLI: Claude Code, Codex, opencode, Cursor and others</strong></summary>
@@ -33,10 +22,22 @@ claude plugin install runbook-implement-task@agent-runbooks-gallery
 npx skills add agent-runbooks/gallery
 ```
 
-It asks which runbooks to take and which agents to install them on. One runbook into the user directory of one agent:
+It asks which runbooks to take and which agents to install them on. One runbook into the user directory:
 
 ```bash
-npx skills add agent-runbooks/gallery --skill runbook-implement-task -g -a claude-code -y
+npx skills add agent-runbooks/gallery --skill runbook-review-loop -g
+```
+
+</details>
+
+<details>
+<summary><strong>Claude Code plugin</strong></summary>
+
+One plugin per runbook:
+
+```bash
+claude plugin marketplace add agent-runbooks/gallery
+claude plugin install runbook-review-loop@agent-runbooks-gallery
 ```
 
 </details>

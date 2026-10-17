@@ -8,6 +8,15 @@
   },
   "plugins": [
     {
+      "name": "runbook-review-loop",
+      "description": "A review loop around one code change: a coder implements the brief, a reviewer reads the changes and runs the checks, the coder fixes the findings until none are left, and the human decides when the fix rounds run out. Every step is a subagent of the session itself; nothing else to install.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/runbook-review-loop"
+      ]
+    },
+    {
       "name": "runbook-implement-task",
       "description": "One coding task end to end: a coder, the project's checks, two independent reviews by different models, triage, fix rounds with verification, a polish pass. Runs its subagents through throng-mcp; a project adapts it with one profile file.",
       "source": "./",
