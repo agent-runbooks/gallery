@@ -1,28 +1,29 @@
 # runbook-implement-task
 
-A [runbook](https://github.com/agent-runbooks/skills) for one coding task in a repository, from brief to reviewed, uncommitted changes. A coder implements the brief, a cheap model runs the checks, two different models review independently, an arbiter triages their findings against the code, the coder fixes what is worth fixing, a verifier checks the fixes, and a last pass cleans up comments and wording. The human is asked only when nothing names the checks, when the repository is dirty at the start, or when the fix rounds run out. Commit, PR and CI stay outside.
+A [runbook](https://github.com/agent-runbooks/skills) for one coding task in a repository, from brief to reviewed, uncommitted changes. A coder implements the brief, the checks run as plain code, two different models review independently, an arbiter triages their findings against the code, the coder fixes what is worth fixing, a verifier checks the fixes, and a last pass cleans up comments and wording. The human is asked only when nothing names the checks, when the repository is dirty at the start, or when the fix rounds run out. Commit, PR and CI stay outside.
 
-Every step runs through [throng-mcp](https://github.com/agent-runbooks/throng-mcp), an MCP server that runs Claude Code, Codex or OpenCode as a subagent of any of them and returns the agent's final message, which is the shape a runbook step already has. The session that runs this runbook needs it.
+Every step that needs a model runs through [throng-mcp](https://github.com/agent-runbooks/throng-mcp), an MCP server that runs Claude Code, Codex or OpenCode as a subagent of any of them and returns the agent's final message, which is the shape a runbook step already has. The session that runs this runbook needs it.
 
 ```
-SKILL.md        what the orchestrator reads: inputs, execution rules, end of run
-flow.py         steps, transitions, the default agent of each executor
-runbook.py      the engine, a copy of agent-runbook-authoring's
-prompts/        common.md and one prompt per step
+SKILL.md           what the orchestrator reads: inputs, execution rules, end of run
+flow.py            steps, the flow, the code of preflight and checks, the default agent of each executor
+agent_runbooks.py  the engine, a copy of agent-runbook-authoring's
+prompts/           common.md and one prompt per agent step
 ```
 
 ## Models
 
-Four executors, each an agent string as throng-mcp names it, `<harness>/<model>[:<effort>]`:
+Three executors, each an agent string as throng-mcp names it, `<harness>/<model>[:<effort>]`:
 
 | Executor | Steps | Default |
 |---|---|---|
-| `top` | triage | `claude/fable:high` |
+| `top` | triage, review B when `second` fails or cannot run | `claude/fable:high` |
 | `strong` | implement, fix-checks, fix, polish, review A, verify | `claude/opus:high` |
-| `light` | preflight, checks | `claude/sonnet:low` |
 | `second` | review B | `codex/gpt-6.1-sol:high` |
 
 Each is an input of the run, so a project changes them in its profile and the human changes them for one run in words: "run implement-task with astra as the second reviewer".
+
+Preflight and checks need no model: `flow.py` runs the `statusCommand` and `checks` commands itself and records their exit codes.
 
 ## Try it
 
@@ -32,14 +33,16 @@ Install the skill, see [the repository README](../../README.md). Then start a se
 
 ## The profile
 
-A project adapts the runbook with one file, `<repo>/.agent-runbooks/implement-task.md`, committed. The orchestrator copies it into the run directory, every executor reads it, and each of its sections replaces a default of the runbook. All sections are optional; without the file the defaults hold: git, the `checks` input, the repository's instructions file. Keep `.agent-runbooks/runs/` out of version control, not the whole directory.
+A project adapts the runbook with one file, `<repo>/.agent-runbooks/implement-task.md`, committed. The orchestrator copies it into the run directory, every executor reads it, and each of its sections replaces a default of the runbook. All sections are optional; without the file the defaults hold: git, the checks command the human gives, the repository's instructions file. Keep `.agent-runbooks/runs/` out of version control, not the whole directory.
 
 ```markdown
 # Implement task
 
 ## Checks
 
-`pnpm typecheck`, `pnpm lint` and `pnpm test`, from the repository root, each even if an earlier one failed. `pnpm test` takes a minute; the e2e suite is not part of the checks.
+command: pnpm check
+
+Typecheck, lint and the unit tests, each even if an earlier one failed. It takes a minute; the e2e suite is not part of it.
 
 ## VCS
 
@@ -54,13 +57,13 @@ Git. Everything uncommitted is the changes, except `pnpm-lock.yaml`: the install
 ## Executors
 
 - second: codex/gpt-6-astra:high
-- light: claude/sonnet:medium
+- strong: claude/opus:max
 ```
 
 What each section is for:
 
-- **Checks**: what to run, from where, and what counts as a check that was not called for. Replaces the `checks` input, which the human then omits. Needed when the checks are more than one command, or depend on which files changed: a monorepo that runs the checks of each package the changes touch.
-- **VCS**: how to list and show the uncommitted changes, for a repository under something other than git.
+- **Checks**: a line `command: <shell command>`, which goes to `start` as the `checks` input, so the human omits it. `flow.py` runs it from the repository root, and the checks pass when it exits 0. Below it, what the executors should know about the checks. Checks that depend on which files changed, such as a monorepo that runs the checks of each package the changes touch, go into a script the command runs.
+- **VCS**: for a repository under something other than git, a line `status: <shell command>` that lists the uncommitted files, one per line and nothing when the tree is clean, which goes to `start` as the `statusCommand` input; and how to show the changes, for the executors.
 - **Rules**: the project rules that matter in a task, for the coder and the reviewers' third axis. A digest, since the executors read the instructions file anyway: the rules that are broken often, or that the file states too far down to be noticed.
 - **Executors**: the agent of the executors to change, one per line.
 

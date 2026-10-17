@@ -2,15 +2,15 @@
 
 Repository: `<repo>`, with the task's branch checked out. The task brief is `<run>/brief.md`. Its rules are the ones your harness loaded with the repository and the Rules section of the profile. Follow them, except for anything that would start a procedure the executor constraints below rule out.
 
-`<run>/profile.md` is the project's profile. Where it has a section, that section replaces the matching default below. Where it is silent, or empty, the default holds.
+`<run>/profile.md` is the project's profile. Where it has a section, that section replaces what the matching paragraph below says it replaces. Where it is silent, or empty, the default holds.
 
 "The changes" are everything uncommitted in `<repo>` outside `.agent-runbooks/`, where the run directory may live: `git status` and `git diff HEAD`, plus untracked files read in full. Files the checks write, such as caches and build output, are not part of the changes: leave them and do not report them. The VCS section of the profile replaces the commands, for a repository under something other than git.
 
 `scope` in the launch message, when it is not empty, is a directory under `<repo>` that the task's changes stay in. Empty means the whole repository.
 
-"The checks" are the shell command the launch message gives as `checks`, run from `<repo>` exactly as given. An empty `checks` means the Checks section of the profile: what to run, from where, and how; a `checks` that is not empty wins over it. Run every check even if an earlier one failed. A check that cannot run, because a binary or a dependency is missing, has failed, not been skipped. A check the profile rules out for these changes is skipped, and a skipped check does not count against `passed`. The checks change no tracked files; if one did, say so in the Checks section.
+"The checks" are the shell command the launch message gives as `checks`, run from `<repo>` exactly as given. They pass when it exits 0. A check that cannot run, because a binary or a dependency is missing, has failed, not been skipped. The Checks section of the profile, if there is one, says more about them. The checks change no tracked files; if one did, say so in the Checks section.
 
-A report that mentions the checks has a "Checks" section: each command, its exit code or `skipped: <why>`, and the full output when the exit code is not 0.
+A report that mentions the checks has a "Checks" section: the command, its exit code, and the full output when the exit code is not 0.
 
 ## Executor constraints
 
