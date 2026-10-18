@@ -23,11 +23,26 @@ Three executors, each an agent string as throng-mcp names it, `<harness>/<model>
 
 Each is an input of the run, so a project changes them in its profile and the human changes them for one run in words: "run implement-task with astra as the second reviewer".
 
+The default `second` is Codex, and it is optional: without it review B runs on `top`, and with the default executors both reviews come from one vendor.
+
 Preflight and checks need no model: `flow.py` runs the `statusCommand` and `checks` commands itself and records their exit codes.
 
 ## Try it
 
-Install the skill, see [the repository README](../../README.md). Then start a session in a repository and ask your agent, with your own task and checks:
+Install the skill with the skills CLI into the user directory; it asks which agents to install it on:
+
+```bash
+npx skills add agent-runbooks/gallery --skill runbook-implement-task -g
+```
+
+Or, in Claude Code, as a plugin:
+
+```bash
+claude plugin marketplace add agent-runbooks/gallery
+claude plugin install runbook-implement-task@agent-runbooks-gallery
+```
+
+Other agents and ways to install: [the repository README](../../README.md#install). The session also needs [throng-mcp](https://github.com/agent-runbooks/throng-mcp) connected. Then start a session in a repository and ask your agent, with your own task and checks:
 
 > Run runbook-implement-task: add an optional `max_length` to `slugify`, cut on a word boundary. The checks are `python3 -m unittest`.
 
