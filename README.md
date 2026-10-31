@@ -69,6 +69,8 @@ To see a run's status in the chat after every step, install [runbook-viewer](htt
 
 CI checks the second and the third.
 
+**A run on your project.** Say so in [Show and tell](https://github.com/agent-runbooks/skills/discussions/categories/show-and-tell) of the skills repository, the one place for discussions across the project: the runbook, the harness that ran it, what came out. Something did not work? An issue here.
+
 ## License
 
 [MIT](LICENSE)
