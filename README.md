@@ -56,6 +56,10 @@ To see a run's status in the chat after every step, install [runbook-viewer](htt
 1. **Settings first.** Each runbook's README says what you can change without touching its steps. runbook-implement-task, for one, takes a [profile file](skills/runbook-implement-task#the-profile) per repository: its checks, version control, rules and models.
 2. **Then a copy.** When you need other steps, copy the runbook into your skills directory under another name and edit `flow.py` and the prompts. [agent-runbook-authoring](https://github.com/agent-runbooks/skills/tree/main/skills/agent-runbook-authoring) helps with that, and with a new runbook from scratch.
 
+## Ran one on your project?
+
+Say so in [Show and tell](https://github.com/agent-runbooks/skills/discussions/categories/show-and-tell) of the skills repository, the one place for discussions across the project: the runbook, the harness that ran it, what came out. Something did not work? Open an issue here.
+
 ## Contributing
 
 **An idea.** Open an issue with the `idea` label. Say what the runbook does, what the human gives it and what it leaves behind. An accepted idea is not a promise that someone builds it.
