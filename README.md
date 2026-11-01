@@ -49,7 +49,7 @@ Copy `skills/<name>` into your harness's skills directory: `~/.claude/skills`, `
 
 </details>
 
-To see a run's status in the chat after every step, install [runbook-viewer](https://github.com/agent-runbooks/skills/tree/main/skills/runbook-viewer) as well.
+A runbook shows the final state of its run in the chat when the run ends, and the progress after every step when you ask for it. To follow a run live on a page with each step's log and files, install [runbook-viewer](https://github.com/agent-runbooks/skills/tree/main/skills/runbook-viewer) as well.
 
 ## Adapt a runbook
 
